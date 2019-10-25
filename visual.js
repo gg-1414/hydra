@@ -1,52 +1,50 @@
-
- // Type some code on a new line (such as "osc().out()"), and press CTRL+shift+enter
-// a.show()
-// //SOUND
+//
+//  // Type some code on a new line (such as "osc().out()"), and press CTRL+shift+enter
+// // a.show()
+// // //SOUND
+// // // //
+// // a.setScale (100)
+// // a.setBins (7)
 // // //
-// a.setScale (100)
-// a.setBins (7)
-// //
-// a.settings[0].cutoff = 1
-// a.settings[1].cutoff = 2
-// a.settings[2].cutoff = 4
-// a.settings[1].cutoff = 6
-// a.settings[4].cutoff = 8
-// a.settings[5].cutoff = 9
-
-// s0.initCam()
-// osc(20, 0.2, 0.5).kaleid().out()
-// src(s0).out(o1)
-// src(o1).modulate(o0, 0.1).out(o2)
-// osc(20).diff(s0).mult(osc(10, 0.5, 0.5)).modulate(osc(10).rotate(0,0.2)).out(o3)
+// // a.settings[0].cutoff = 1
+// // a.settings[1].cutoff = 2
+// // a.settings[2].cutoff = 4
+// // a.settings[1].cutoff = 6
+// // a.settings[4].cutoff = 8
+// // a.settings[5].cutoff = 9
+//
+// // s0.initCam()
+// // osc(20, 0.2, 0.5).kaleid().out()
+// // src(s0).out(o1)
+// // src(o1).modulate(o0, 0.1).out(o2)
+// // osc(20).diff(s0).mult(osc(10, 0.5, 0.5)).modulate(osc(10).rotate(0,0.2)).out(o3)
 
 
-
-// osc(20, 0.3, 0.5)
-// .
-// .out()
-
-noise().out()
-
-gradient( 3 )
-// .color( 1,0,1  ) // 1,1,0 1,0,0 1,0,1 => no blinking, illuminating red to purple/blue
-// .color( [1,0,0], [1,1,1], [0,0,1] ) // 1,1,0 1,0,0 1,0,1 => blinking red -> blue
-contrast( ({time}) => Math.sin(time * 0.5) * 5 )
-// .brightness( 1.2 )
-// .modulatePixelate(osc(50), 10.0, 3.0)
-// .mult( o0, 0.1 )
-.kaleid( 6 )
-// .repeat( 3.0, 3.0, 1.1, 0.0 )
-// .rotate( 2, 0.09 )
+noise(20, 0.00)
+.kaleid(8)
+.rotate(2.0, (({time}) => Math.sin(time * 0.005)* 0.1))
+.color(() => mouse.x * 0.01,0.5,)() => mouse.x * 0.01)
+.modulateRepeat(osc(90))
 .out()
+
+osc(50, 0.1, 10.5)
+.pixelate(20, 20)
+.modulateKaleid(o0, 8)
+.scale( ( ({time}) => Math.sin(time * 0.6) ))
+.color(0.8, 0.3, 0.8)
+.out(o1)
+
+voronoi(25, 0.3, 0.7)
+.modulateScrollX(o0)
+// .color( 0.5, 0.2, 0.6)
+.pixelate(20, 20)
+.contrast( ({time}) => Math.sin(time * 0.5) * 0.5)
+.out(o0)
 
 render(o1)
 
-
-
-// noise()
-//   .mult(osc(10,0.25,1))
-//   .scrollY(1,0.25)
-//   .pixelate([100,40,20,70].fast(0.25))
-//   .modulateRotate(src(o0).scale(0.5),0.125)
-//   .diff(src(o0).rotate([-0.05,0.05].fast(0.125)))
-//   .out(o0)
+shape(3, 0.3, 0.3)
+.modulateScale(osc(50), 2.0, 0.2)
+.color( (({time}) => Math.sin(time * 0.5)), 0.5, 0.5 )
+.modulatePixelate(o1, 10, 3.0)
+.out(o1)
